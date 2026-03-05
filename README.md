@@ -369,4 +369,105 @@ graph LR
 
 ---
 
-*Document generated: 2026-03-05 | SHRIKE v2026.2.26 | Architecture v1.0*
+---
+
+## 🚀 8. Optimization Opportunities — What's Next
+
+> *Based on research of best-in-class AI agent setups across executives, founders, and power users (March 2026). Full research: [shrike-optimization-research.md](shrike-optimization-research.md)*
+
+### Current State vs. Best-in-Class
+
+```mermaid
+graph LR
+    classDef strong fill:#d5f5e3,stroke:#27ae60,stroke-width:2px,color:#000
+    classDef gap fill:#fdedec,stroke:#e74c3c,stroke-width:2px,color:#000
+    classDef partial fill:#fef9e7,stroke:#f39c12,stroke-width:2px,color:#000
+
+    subgraph STRONG["✅ Best-in-Class Already"]
+        A1["Two-tier Opus/Sonnet\nOrchestration"]:::strong
+        A2["File-based Identity\nPersistence"]:::strong
+        A3["Multi-channel\nDelivery"]:::strong
+        A4["Voice Note\nPipeline"]:::strong
+        A5["Google Workspace\nFull Integration"]:::strong
+    end
+
+    subgraph GAPS["❌ Gaps to Close"]
+        B1["Email Triage\nPipeline"]:::gap
+        B2["Morning Intelligence\nBriefing"]:::gap
+        B3["Financial Net Worth\nTracking"]:::gap
+        B4["Content Creation\nPipeline"]:::gap
+        B5["Competitive Intel\nDigest"]:::gap
+        B6["Searchable Decision\nLog"]:::gap
+    end
+
+    subgraph PARTIAL["⚠️ Partially Built"]
+        C1["Proactive Cron\nJobs"]:::partial
+        C2["Calendar Pre-Meeting\nBriefs"]:::partial
+        C3["Follow-up\nTracking"]:::partial
+        C4["Voice-to-Action\nRouting"]:::partial
+    end
+```
+
+### Top 10 Upgrades — Ranked by Impact
+
+| # | Upgrade | Impact | Effort | Goals Served |
+|---|---------|--------|--------|-------------|
+| 1 | **Morning Intelligence Briefing** — auto-delivered 7am daily (emails + calendar + news) | 🔴 High | Easy | All tracks |
+| 2 | **Email Triage Pipeline** — auto-classify, draft responses, approve via Telegram | 🔴 High | Medium | Corporate, Apollo, personal |
+| 3 | **Financial Net Worth Tracker** — weekly report toward $2M goal | 🔴 High | Easy-Med | Financial |
+| 4 | **Calendar Intelligence** — pre-meeting briefs 30 min before events | 🔴 High | Easy | Corporate, Apollo, ventures |
+| 5 | **Apollo Content Pipeline** — event → Instagram + LinkedIn + newsletter auto-draft | 🔴 High | Medium | Apollo, personal brand |
+| 6 | **Competitive Intel Digest** — weekly Monday brief on beauty/wellness/SaaS | 🟡 Med-High | Easy | Corporate, ventures |
+| 7 | **Follow-up Tracker** — auto-detect commitments, remind before deadlines | 🟡 Med-High | Easy | All tracks |
+| 8 | **Voice-to-Action Routing** — classify voice notes → task/note/research/content | 🟡 Med-High | Easy | Mobile productivity |
+| 9 | **Searchable Decision Log** — structured archive of all strategic decisions | 🟡 Med-High | Easy | All tracks |
+| 10 | **Notion MCP Integration** — visual project command center | 🟡 Medium | Medium | Apollo, ventures |
+
+### Implementation Phases
+
+```mermaid
+gantt
+    title SHRIKE Upgrade Roadmap
+    dateFormat YYYY-MM-DD
+    axisFormat %b %d
+
+    section Phase 1: Quick Wins (This Week)
+    Morning briefing cron       :2026-03-05, 1d
+    Email triage rules          :2026-03-05, 1d
+    Calendar prep heartbeat     :2026-03-06, 1d
+    Follow-up tracker           :2026-03-06, 1d
+    Decision log structure      :2026-03-07, 1d
+    Voice routing logic         :2026-03-07, 1d
+
+    section Phase 2: High Impact (This Month)
+    Financial tracking setup    :2026-03-10, 5d
+    Competitive intel cron      :2026-03-10, 2d
+    Apollo content pipeline     :2026-03-12, 5d
+    Net worth weekly report     :2026-03-17, 3d
+
+    section Phase 3: Advanced (This Quarter)
+    Notion MCP integration      :2026-04-01, 5d
+    Email approval workflow     :2026-04-07, 7d
+    Full voice-to-action        :2026-04-14, 3d
+    Perplexity Spaces           :2026-04-17, 2d
+```
+
+### Tools to Add
+
+| Tool | Purpose | Cost | Priority |
+|------|---------|------|----------|
+| **Monarch Money** | Net worth + expense tracking | Free / $14.99/mo | 🔴 High |
+| **Postiz** | Social media scheduling (IG, LinkedIn) | Free tier | 🔴 High |
+| **Perplexity Pro** | Competitive intelligence Spaces | $20/mo | 🟡 Medium |
+| **Notion + MCP** | Visual project management | Free / $8/mo | 🟡 Medium |
+| **Make.com** | Email approval workflows | Free / $9/mo | 🟡 Medium |
+| **Shortwave** | AI-powered Gmail client | $7/mo | 🟢 Optional |
+
+### The Compounding Case
+
+> At Marina's compensation level ($295K), recovering 2-3 hours/day through these upgrades = **$150-225K equivalent value annually**. Total setup cost: 15-20 hours one-time. **The asymmetry is decisive.**
+
+---
+
+*Architecture document is auto-updated when the SHRIKE ecosystem changes.*
+*Last updated: 2026-03-05 | SHRIKE v2026.2.26 | Architecture v1.1*
