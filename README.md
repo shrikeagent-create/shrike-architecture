@@ -1,86 +1,223 @@
-# SHRIKE Architecture
+# SHRIKE — System Architecture
 
-> Last updated: March 17, 2026
+> Last updated: March 18, 2026
 
-## SHRIKE Architecture
+## System Architecture
 
-### Core System
-- **Runtime**: OpenClaw gateway on Mac mini (192.168.1.177)
-- **Model**: Claude Opus (main session) + Sonnet (sub-agents)
-- **Channels**: Discord (bot: Shrike) + Telegram (shrike999bot) — cross-platform DM sync via dmScope: "main"
-- **Config**: /Users/theshrike/.openclaw/openclaw.json
-- **Workspace**: /Users/theshrike/.openclaw/workspace/
+### High-Level Overview
 
-### Discord Server (Guild: 1478978953665577092)
-**🏗️ Projects**: #apollo-society, #corporate-track, #ventures
-**📋 Operations**: #deliverables, #daily-briefing, #portfolio, #shrike-log, #linkedin-drafts
-**Intelligence Briefings**: #finance-markets, #wellness-intel, #beauty-commerce
+```mermaid
+graph TB
+    subgraph Runtime["🖥️ Mac Mini (Runtime)"]
+        OC["🦞 OpenClaw<br/>Orchestrator"]
+        MC["📊 Mission Control<br/>Dashboard"]
+        OL["🧠 Ollama<br/>Embeddings"]
+        Cache["📁 Local Cache<br/>Deliverables"]
+    end
 
-### Notion Workspace (SHRIKE HQ)
-- 🏛️ Apollo Society Projects (31d1afa8-22e8-81be-b402-ea243e2baafc) — Tags: Events/Marketing/Product Dev
-- 📊 Project Tracker (31d1afa8-22e8-816e-b900-dcd6c8a48fe9) — Tracks: L'Oréal/Personal
-- 🎵 Shows & Tickets (31d1afa8-22e8-812b-bfa3-e6f60c1b866a)
-- ✈️ Travel & Plans (31d1afa8-22e8-81e7-b1f8-dadaa862bc75)
-- 📄 Deliverables Archive (31d1afa8-22e8-81be-a825-fda1f0674a0e)
-- 💰 Portfolio Tracker (31d1afa8-22e8-8161-89f7-dd6b11e3e6da)
-- ⚖️ Decision Log (31d1afa8-22e8-8160-950d-d4db07a5b7ae)
+    subgraph Sources["Sources of Truth"]
+        Notion["📋 Notion<br/>Projects & Tasks"]
+        Drive["📁 Google Drive<br/>Files"]
+        GH["🔧 GitHub<br/>Architecture & Logic"]
+    end
 
-### Cron Jobs (9 active)
-| Job | Schedule | Target |
-|-----|----------|--------|
-| Finance & Markets | Mon 7 AM | #finance-markets |
-| Wellness Intel | Mon+Thu 7 AM | #wellness-intel + email |
-| Beauty & Commerce | Tue+Fri 7 AM | #beauty-commerce |
-| Functional Fragrance | Fri 9 AM | #wellness-intel |
-| LinkedIn Drafts | Mon 8 AM | #linkedin-drafts |
-| Daily Briefing | Daily 8 AM | DMs (to-do + calendar + email) |
-| Portfolio Review | Sun 7 PM | #portfolio |
-| AA Credit Reminder | 1st+15th Apr-May | DMs |
-| SW Credit Reminder | 1st+15th May-Jun | DMs |
+    subgraph Comms["Communication Layer"]
+        Discord["💬 Discord<br/>Ops & Updates"]
+    end
 
-### Email Triage
-- 4 inboxes: iamsukhova@gmail.com, sukhova.mrn@gmail.com, marina@apollosociety.nyc, hello@apollosociety.nyc
-- Digest: 7 AM daily (launchd)
-- Urgent scan: every 2h, 8 AM-10 PM (launchd)
-- Quiet hours: 11 PM - 7 AM
-- Tool: gog gmail CLI
+    subgraph Services["External Services"]
+        Gmail["📧 Gmail<br/>4 Inboxes"]
+        GCal["📅 Google Calendar"]
+        Slides["📊 Google Slides"]
+        OnePass["🔐 1Password"]
+    end
 
-### Mission Control
-- Port 3100, auto-start via launchd
-- Remote access: Cloudflare tunnel (temporary quick tunnel)
-- DB: SQLite at /Users/theshrike/mission-control/.data/mission-control.db
+    OC -->|"projects/tasks"| Notion
+    OC -->|"files"| Drive
+    OC -->|"commits"| GH
+    OC -->|"notifications"| Discord
+    OC -->|"email ops"| Gmail
+    OC -->|"scheduling"| GCal
+    OC -->|"presentations"| Slides
+    OC -->|"secrets"| OnePass
+    OC -->|"local save"| Cache
+    OC -->|"semantic search"| OL
 
-### Integrations
-- Google Workspace (Gmail, Calendar, Slides, Drive) via gog CLI
-- Notion API (key in 1Password)
-- 1Password CLI (op)
-- Cloudflare tunnel (cloudflared)
+    Notion -.->|"updates"| Discord
+    GH -.->|"summaries"| Discord
+    Drive -.->|"links"| Notion
+    Cache -->|"upload"| Drive
 
-### Output Routing Rules
-- Deliverables → /Users/theshrike/Desktop/Deliverables/ + Discord #deliverables + Notion
-- Architecture → GitHub
-- Daily data → Notion
-- Alerts/urgent → Discord DMs
-- Intel briefings → Discord channels (not email, except Wellness)
-- LinkedIn drafts → #linkedin-drafts only (never auto-post)
+    style OC fill:#e74c3c,color:#fff
+    style Notion fill:#000,color:#fff
+    style Drive fill:#0f9d58,color:#fff
+    style GH fill:#333,color:#fff
+    style Discord fill:#5865f2,color:#fff
+```
+
+### System Roles
+
+- **Notion** → Execution source. All projects, tasks, events, tracking live here.
+- **Google Drive** → File source. Single authority for all documents, decks, images.
+- **GitHub** → System logic. Architecture, config history, versioned operating model.
+- **Discord** → Ops layer. Real-time notifications, daily briefings, intel delivery. Mirror only.
+- **OpenClaw** → Orchestrator. Connects everything. Runs sync, cron, agents, memory.
+- **Mac Mini** → Runtime + cache. Processing engine. Local file cache (Drive is authority).
 
 ---
 
-## To-Do List
+## Data Flow
 
-### AI Infrastructure
-1. Permanent remote tunnel (Cloudflare named tunnel)
-2. Email triage cron verification
-3. Auto-routing automation (deliverables → Discord + Notion)
-4. Memory search embeddings (semantic recall)
-5. GitHub integration (architecture → repo)
-6. Telegram outbound (automated messages)
-7. MC dashboard customization
-8. Portfolio tracker setup
-9. Decision log — first entries
-10. Voice briefings (ElevenLabs TTS)
+### Project & Task Flow
+```mermaid
+flowchart LR
+    A[New Project] --> B[Notion<br/>Create]
+    B --> C{Cross-functional?}
+    C -->|No| D[Discord<br/>Notify]
+    C -->|Yes| E[Discord + GitHub<br/>if architecture]
+    F[Task Update] --> G[Notion<br/>Update]
+    G --> H{Significant?}
+    H -->|Yes| D
+    H -->|No| I[Log only]
+    J[Complete] --> K[Notion<br/>Archive] --> D
+```
+
+### File Flow
+```mermaid
+flowchart LR
+    A[File Created] --> B[Mac Mini<br/>Local Save]
+    B --> C[Google Drive<br/>Upload]
+    C --> D[Notion<br/>Link Added]
+    D --> E[Discord<br/>Notify]
+
+    style C fill:#0f9d58,color:#fff
+```
+
+### Architecture Flow
+```mermaid
+flowchart LR
+    A[System Change] --> B[GitHub<br/>Commit]
+    B --> C[Discord<br/>#shrike-log]
+```
+
+### Failure & Retry Flow
+```mermaid
+flowchart TD
+    A[Write Attempt] --> B{Success?}
+    B -->|Yes| C[Log Write]
+    B -->|No| D[Retry Once]
+    D --> E{Success?}
+    E -->|Yes| C
+    E -->|No| F[Queue for<br/>Next Sync]
+    F --> G[Log Failure]
+    G --> H{Resolved at<br/>Daily Recon?}
+    H -->|Yes| C
+    H -->|No| I[Notify Marina<br/>via Discord DM]
+```
+
+---
+
+## Sync Logic
+
+| Rule | Detail |
+|------|--------|
+| **Default** | 1 source + 1 mirror per item |
+| **Exception** | Multi-system only when functionally required |
+| **Primary** | Event-driven (sync at point of write) |
+| **Daily** | Full reconciliation at 8 AM briefing |
+| **Weekly** | Audit + health score (1-10) on Sunday |
+| **Writes** | Trusted at write time, logged always |
+| **Verification** | Daily reconciliation only (not per-write) |
+| **Conflicts** | Source of truth wins, mirror updates |
+| **Version control** | All system changes committed to GitHub |
+
+---
+
+## Integrations & APIs
+
+| Integration | Purpose | Direction | Protocol |
+|-------------|---------|-----------|----------|
+| **Notion API** | Projects, tasks, databases | Read/Write | REST, key in 1Password |
+| **Discord API** | Notifications, briefings, ops | Write (mirror) | Bot via OpenClaw |
+| **GitHub API** | Architecture commits, repo management | Read/Write | `gh` CLI, authenticated |
+| **Google Drive** | File storage, upload, organize | Read/Write | `gog drive` CLI |
+| **Gmail** | Email triage, send (4 inboxes) | Read/Write | `gog gmail` CLI |
+| **Google Calendar** | Events, scheduling | Read/Write | `gog calendar` CLI |
+| **Google Slides** | Presentations | Read/Write | `gog slides` CLI |
+| **Ollama** | Local embeddings for memory search | Local | `nomic-embed-text`, port 11434 |
+| **1Password** | Secrets management | Read | `op` CLI |
+| **Mission Control** | Dashboard, monitoring | Local | Next.js, port 3100 |
+
+---
+
+## Runtime Details
+
+### Core System
+- **Runtime**: OpenClaw gateway on Mac mini
+- **Model**: Claude Opus (main) + Sonnet (sub-agents, cron, compaction)
+- **Channel**: Discord only (Telegram disabled)
+- **Memory**: Semantic search via ollama/nomic-embed-text (18 files, 48 chunks)
+- **Heartbeat**: 60 min, active hours 7 AM–11 PM ET
+
+### Cron Schedule (staggered)
+| Time | Job | Target |
+|------|-----|--------|
+| 7:00 AM Mon | Finance & Markets | #finance-markets |
+| 7:15 AM Mon+Thu | Wellness Intel | #wellness-intel + email |
+| 7:30 AM Tue+Fri | Beauty & Commerce | #beauty-commerce |
+| 8:00 AM Daily | Morning Briefing | DMs (to-do + calendar) |
+| 8:30 AM Mon | LinkedIn Drafts | #linkedin-drafts |
+| 9:00 AM Fri | Functional Fragrance | #wellness-intel |
+| 7:00 PM Sun | Portfolio Review | #portfolio |
+
+### Notion Databases
+| Database | Purpose |
+|----------|---------|
+| 🏛️ Apollo Society Projects | Apollo events, marketing, product dev |
+| 📊 Project Tracker | L'Oréal + Personal tracks |
+| 🎵 Shows & Tickets | Events with dates |
+| ✈️ Travel & Plans | Trips |
+| 📄 Deliverables Archive | File log with Drive links |
+| 💰 Portfolio Tracker | Investment tracking |
+| ⚖️ Decision Log | Key decisions |
+
+### Google Drive
+```
+SHRIKE Deliverables/
+├── Apollo/
+├── Corporate/
+├── Intelligence/
+├── Infrastructure/
+└── Personal/
+```
+
+### Discord Channels
+- **Projects**: #apollo-society, #corporate-track, #ventures
+- **Operations**: #deliverables, #daily-briefing, #portfolio, #shrike-log, #linkedin-drafts
+- **Intelligence**: #finance-markets, #wellness-intel, #beauty-commerce
+
+---
+
+## To-Do
+
+### Active
+1. Permanent MC remote access (stable tunnel)
+2. Cron prompt compression
+3. Memory file structure + write/retrieval rules
+4. MC metrics dashboard
+5. Model policy finalization
+6. Gateway service reinstall
+7. Portfolio tracker setup
+8. Voice briefings (ElevenLabs)
 
 ### Blocked
-- Apple Notes import (not on Mac mini)
-- Google Slides for marina@apollosociety.nyc (untested)
-- Magic Mouse BT connection (needs physical access)
+- Apple Notes import (on Marina's laptop, not Mac mini)
+- MC browser login via tunnel (CSP partially fixed, tunnel unstable)
+
+---
+
+## Maintenance
+- Update this README on any system change
+- Keep aligned with `SYNC.md`
+- Commit changes with clear messages
+- Review quarterly for unnecessary complexity
