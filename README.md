@@ -1,6 +1,6 @@
 # SHRIKE — System Architecture
 
-> Last updated: March 19, 2026
+> Last updated: March 20, 2026
 
 ## System Architecture
 
@@ -166,18 +166,18 @@ flowchart TD
 - **Setup jobs tracker**: `memory/shrike-setup-jobs.md`
 
 ### Cron Schedule (staggered)
-| Time | Job | Target |
-|------|-----|--------|
-| 7:00 AM Daily | System Health & Bug Fix | #shrike-log |
-| 7:15 AM Mon+Thu | Wellness Intel | #wellness-intel + email to Sofya/Marina/Lyubov |
-| 7:30 AM Daily | Morning Briefing (11 sections) | #daily-briefing |
-| 7:30 AM Tue+Fri | Beauty & Commerce | #beauty-commerce |
-| 7:00 AM Mon | Finance & Markets | #finance-markets |
-| 8:00 AM Fri | AI & Automation Intel | #ai-automation-intel |
-| 8:30 AM Mon | LinkedIn Drafts | #linkedin-drafts |
-| 9:00 AM Fri | Functional Fragrance | #wellness-intel |
-| 7:00 PM Sun | Portfolio Screenshot Reminder | Discord DM |
-| 11:45 PM Daily | Session Archive | Silent (memory/sessions/) |
+| Time | Job | Target | Notes |
+|------|-----|--------|-------|
+| 7:00 AM Daily | System Health & Bug Fix | #shrike-log | |
+| 7:15 AM Mon+Thu | Wellness Intel (Apollo-specific) | #wellness-intel + email to Sofya/Marina/Lyubov | Refocused: Apollo wellness only |
+| 7:30 AM Daily | Morning Briefing (11 sections) | #daily-briefing | |
+| 7:30 AM Tue+Fri | Beauty & Commerce (L'Oréal/GEO/consulting) | #beauty-commerce | Refocused: L'Oréal, GEO, consulting |
+| 7:00 AM Mon | Finance & Markets (incl Reddit/X/portfolio recos) | #finance-markets | Expanded: Reddit/X/portfolio recs |
+| 8:00 AM Fri | AI & Automation Intel (Shrike-specific) | #ai-automation-intel | Refocused: Shrike tools/workflow |
+| 9:00 AM Mon | LinkedIn Posts + Infographics (2/week) | #personal-branding | New: 2 posts + infographics |
+| 9:00 AM Fri | Functional Fragrance | #wellness-intel | |
+| 7:00 PM Sun | Portfolio Screenshot Reminder | Discord DM | |
+| 11:45 PM Daily | Session Archive | Silent (memory/sessions/) | |
 
 ### Notion Databases
 | Database | Purpose |
@@ -200,10 +200,29 @@ SHRIKE Deliverables/
 └── Personal/
 ```
 
-### Discord Channels
-- **Projects**: #apollo-society, #corporate-track, #ventures
-- **Operations**: #deliverables, #daily-briefing, #portfolio, #shrike-log, #linkedin-drafts
-- **Intelligence**: #finance-markets, #wellness-intel, #beauty-commerce, #ai-automation-intel
+### Discord Channels (as of Mar 20, 2026)
+
+**Intel Briefings** (4 channels — all refocused)
+- #finance-markets — Finance + Reddit/X/portfolio recos
+- #wellness-intel — Apollo-specific wellness
+- #beauty-commerce — L'Oréal/GEO/consulting-specific
+- #ai-automation-intel — Shrike-specific AI/tools
+
+**Projects** (5 channels)
+- #apollo-society — Apollo Society platform
+- #corporate-track — L'Oréal corporate work
+- #ventures — Ventures (Urban Space, etc.)
+- #geo-consulting — GEO consulting venture _(new Mar 20)_
+- #personal-branding — LinkedIn posts, infographics _(renamed from #linkedin-drafts)_
+
+**Operations** (3 channels)
+- #daily-briefing — Morning briefing output
+- #shrike-log — System health, infrastructure
+- #reading-list — Curated reading _(new Mar 20)_
+
+**Archived**: #general, #portfolio, #deliverables _(archived Mar 20)_
+
+**Deliverables routing**: All deliverables go to their project channel with 📦 tag. No central #deliverables channel.
 
 ---
 
@@ -214,10 +233,24 @@ SHRIKE Deliverables/
 2. Commerce intelligence skill (automated monitoring)
 3. LinkedIn engagement tracking integration
 4. MC remote access — Tailscale recommended (or LAN at 192.168.1.177:3100)
-5. MC password change (still default)
-6. Apple Notes sync (on Marina's laptop, not Mac mini)
-7. Notion ↔ OpenClaw deeper sync
-8. Email auto-filters (Gmail rules from kill list)
+5. Apple Notes sync (on Marina's laptop, not Mac mini)
+6. Notion ↔ OpenClaw deeper sync
+7. Email auto-filters (Gmail rules from kill list)
+8. GEO consulting framework build (scheduled Mar 21)
+
+### Completed (Mar 20)
+- ✅ Discord restructure: archived #general, #portfolio, #deliverables
+- ✅ Renamed #linkedin-drafts → #personal-branding, moved to Projects category
+- ✅ Created #geo-consulting under Projects
+- ✅ Created #reading-list under Operations
+- ✅ All intel briefing crons refocused (finance+Reddit/X, wellness=Apollo, beauty=L'Oréal/GEO, AI=Shrike)
+- ✅ LinkedIn infographic template standardized (templates/linkedin-infographic.md)
+- ✅ LinkedIn cron: Monday 9 AM, 2 posts + infographics → #personal-branding
+- ✅ GEO consulting venture track initiated
+- ✅ Wix API fully operational (775 contacts, 20 campaigns; can't create campaign content via API)
+- ✅ MC password changed
+- ✅ Duplicate crons disabled (old LinkedIn + old Wednesday wellness)
+- ✅ Deliverables routing updated: project channels with 📦 tag, no central #deliverables
 
 ### Completed (Mar 19)
 - ✅ Gamma API integrated ($25/mo Pro, API key active)
