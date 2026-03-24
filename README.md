@@ -1,6 +1,6 @@
 # SHRIKE — System Architecture
 
-> Last updated: March 21, 2026
+> Last updated: March 23, 2026
 
 ## System Architecture
 
@@ -237,6 +237,12 @@ SHRIKE Deliverables/
 6. Notion ↔ OpenClaw deeper sync
 7. Email auto-filters (Gmail rules from kill list)
 8. ~~GEO consulting framework build (scheduled Mar 21)~~ → ✅ Completed Mar 21
+
+### Completed (Mar 23)
+- ✅ LinkedIn infographics drafted by weekly cron: Post 1 (Agentic Commerce) + Post 2 (Retail Media) — saved to ~/Desktop/Deliverables/
+- ✅ LinkedIn posts scheduled: Tue Mar 25 + Thu Mar 27 @ 10 AM ET, posted to #personal-branding
+- ⚠️ Wednesday Wellness Intel Briefing timed out (300s limit) — consecutiveErrors: 1, needs optimization
+- ⚠️ LinkedIn Weekly Post Drafts delivery config error — job ran fine but announce delivery broken (channel vs DM syntax)
 
 ### Completed (Mar 21)
 - ✅ GEO Consulting framework built: AI Visibility Audit Framework, Positioning Doc, Competitive Landscape, LinkedIn infographic
