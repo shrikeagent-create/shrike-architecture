@@ -1,6 +1,6 @@
 # SHRIKE — System Architecture
 
-> Last updated: March 23, 2026
+> Last updated: March 24, 2026
 
 ## System Architecture
 
@@ -237,6 +237,11 @@ SHRIKE Deliverables/
 6. Notion ↔ OpenClaw deeper sync
 7. Email auto-filters (Gmail rules from kill list)
 8. ~~GEO consulting framework build (scheduled Mar 21)~~ → ✅ Completed Mar 21
+
+### Completed (Mar 24)
+- ✅ Scents of Wood Digital Commerce & Growth Analysis deliverable created (~/Desktop/Deliverables/scents-of-wood-digital-analysis-2026-03-24.md) — full consulting audit, $5M–$10M DTC opportunity identified
+- ⚠️ Wednesday Wellness Intel still timing out (300s) — consecutiveErrors: 1, needs prompt compression or job split
+- ⚠️ LinkedIn Weekly Post Drafts delivery config error (consecutiveErrors: 1) — delivery.to format incorrect
 
 ### Completed (Mar 23)
 - ✅ LinkedIn infographics drafted by weekly cron: Post 1 (Agentic Commerce) + Post 2 (Retail Media) — saved to ~/Desktop/Deliverables/
