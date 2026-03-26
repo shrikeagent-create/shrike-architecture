@@ -1,6 +1,6 @@
 # SHRIKE — System Architecture
 
-> Last updated: March 24, 2026
+> Last updated: March 25, 2026
 
 ## System Architecture
 
@@ -238,10 +238,19 @@ SHRIKE Deliverables/
 7. Email auto-filters (Gmail rules from kill list)
 8. ~~GEO consulting framework build (scheduled Mar 21)~~ → ✅ Completed Mar 21
 
+### Completed (Mar 25)
+- ✅ LinkedIn Weekly Post Drafts delivery config corrected (raw ID → channel+to format) — consecutiveErrors reset
+- ✅ Daily notes created for 2026-03-25
+- ⚠️ Wednesday Wellness Intel still timing out (timeout raised to 420s, monitoring) — consecutiveErrors: 1
+- ⚠️ 1Password CLI hanging — blocks Notion sync (recurring issue, nightly workaround in place)
+- ⚠️ Calendar access blocked: Mac mini Terminal needs System Settings → Privacy → Calendars permission
+
 ### Completed (Mar 24)
 - ✅ Scents of Wood Digital Commerce & Growth Analysis deliverable created (~/Desktop/Deliverables/scents-of-wood-digital-analysis-2026-03-24.md) — full consulting audit, $5M–$10M DTC opportunity identified
-- ⚠️ Wednesday Wellness Intel still timing out (300s) — consecutiveErrors: 1, needs prompt compression or job split
-- ⚠️ LinkedIn Weekly Post Drafts delivery config error (consecutiveErrors: 1) — delivery.to format incorrect
+- ✅ Job Search Research deliverable created (~/Desktop/Deliverables/job-search-research-2026-03-24.md) — 20+ sources, top pick: Calvin Klein VP Digital Ecommerce (PVH)
+- ✅ Personal branding strategy audit completed — full digital footprint audit, 3-pillar strategy framed
+- ✅ Wednesday Wellness Intel timeout raised to 420s
+- ✅ LinkedIn Weekly Post Drafts delivery config fix applied
 
 ### Completed (Mar 23)
 - ✅ LinkedIn infographics drafted by weekly cron: Post 1 (Agentic Commerce) + Post 2 (Retail Media) — saved to ~/Desktop/Deliverables/
