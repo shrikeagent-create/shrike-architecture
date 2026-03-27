@@ -1,6 +1,6 @@
 # SHRIKE — System Architecture
 
-> Last updated: March 25, 2026
+> Last updated: March 26, 2026
 
 ## System Architecture
 
@@ -237,6 +237,13 @@ SHRIKE Deliverables/
 6. Notion ↔ OpenClaw deeper sync
 7. Email auto-filters (Gmail rules from kill list)
 8. ~~GEO consulting framework build (scheduled Mar 21)~~ → ✅ Completed Mar 21
+
+### Completed (Mar 26)
+- ✅ Revlon VP Digital tailored resume + cover letter created (6 files — .md + .docx variants) → ~/Desktop/Deliverables/
+- ✅ Daily notes created for 2026-03-26
+- ⚠️ LinkedIn Weekly Post Drafts cron: consecutiveErrors: 1 (delivery config — fix applied Mar 25, monitoring)
+- ⚠️ Wednesday Wellness Intel: still timing out (420s raised timeout, monitoring)
+- ⚠️ Notion deliverables sync: 1Password CLI hanging — deliverables queued (6 new files Mar 26: Revlon resume/CL + general resume)
 
 ### Completed (Mar 25)
 - ✅ LinkedIn Weekly Post Drafts delivery config corrected (raw ID → channel+to format) — consecutiveErrors reset
