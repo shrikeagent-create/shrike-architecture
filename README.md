@@ -1,6 +1,6 @@
 # SHRIKE — System Architecture
 
-> Last updated: March 30, 2026
+> Last updated: April 5, 2026
 
 ## System Architecture
 
@@ -312,3 +312,16 @@ SHRIKE Deliverables/
 - Keep aligned with `SYNC.md`
 - Commit changes with clear messages
 - Review quarterly for unnecessary complexity
+
+### Completed (Apr 5, 2026)
+- ✅ **Agent Architecture V1 deployed**
+  - `inner-compass` agent created: Opus, isolated workspace, bound to Discord #inner-compass (1488625304011538635)
+  - Therapist persona fully isolated from Shrike — separate workspace, memory, sessions, zero cross-talk
+- ✅ **Persona System formalized in AGENTS.md** — 8 cognitive personas:
+  - Default Shrike (GPT-5.2), Strategist (Opus), Analyst (mini sub-agent), Researcher (mini sub-agent)
+  - Critical Thinker (Opus, mandatory on major decisions), Scout, Negotiator (Opus), Ghostwriter (Sonnet)
+- ✅ **Self-Refine Loop updated** — Critical Thinker formalized as mandatory step 2
+- ✅ **Cron fixes** — 5 jobs patched with `model: "sonnet"` to resolve timeout failures:
+  - Daily System Health, Daily Sync & Cleanup, Daily Morning Briefing, Friday Beauty Brief, Friday AI Intel
+- ✅ **Nightly Monitor cron added** — 11 PM daily, Gemini Flash, watches all jobs, DMs Marina on 3+ consecutive errors
+- ✅ Multi-tier model routing: GPT-5.2 (default) → Opus (strategic depth) → Sonnet (sub-agents) → GPT-5 mini (volume) → Flash (heartbeat/monitor)
