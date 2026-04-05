@@ -153,14 +153,46 @@ flowchart TD
 
 ## Runtime Details
 
+### Agents (as of Apr 5, 2026)
+
+| Agent | Purpose | Model | Workspace | Channel Binding |
+|-------|---------|-------|-----------|----------------|
+| **main (Shrike)** | Strategic AI chief of staff | GPT-5.2 default | `~/.openclaw/workspace` | Discord — all channels except #inner-compass |
+| **inner-compass** | Private therapist. Fully isolated. Zero cross-talk. | Opus | `~/.openclaw/agents/inner-compass/workspace` | Discord #inner-compass only |
+
+### Persona System (within Shrike)
+
+| Persona | Role | Activation | Model |
+|---------|------|-----------|-------|
+| 🪶 Default Shrike | Strategic co-pilot, synthesis | All normal conversation | GPT-5.2 |
+| 🧠 Strategist | Long-arc systems thinking, optionality | `/model opus` \| career/venture decisions | Opus |
+| 📊 Analyst | Data, metrics, quantitative | Auto-spawned for financial/benchmark tasks | GPT-5 mini |
+| 🔬 Researcher | Wide-net info gathering | Auto-spawned for intel/market research | GPT-5 mini |
+| ⚔️ Critical Thinker | Devil's advocate, assumption destroyer | AUTO on major decisions \| "challenge this" | Opus |
+| 🕵️ Scout | Opportunity detection — jobs, leads, partnerships | "scan for opportunities" \| pipeline > 3 leads | GPT-5 mini → Sonnet |
+| 💼 Negotiator | Comp, equity terms, BATNA, pricing | Any comp/offer/equity discussion | Opus |
+| ✍️ Ghostwriter | Marina's voice for external content | LinkedIn \| proposals \| Apollo comms | Sonnet |
+
+### Model Routing
+
+| Tier | Model | Used For | Cost |
+|------|-------|---------|------|
+| Primary | `openai/gpt-5.2` (alias: `gpt5`) | Main conversation, default | $1.75/M in |
+| Strategic depth | `anthropic/claude-opus-4-6` (alias: `opus`) | Critical Thinker, Strategist, Negotiator, fallback | $15/M in |
+| Workers | `anthropic/claude-sonnet-4-6` (alias: `sonnet`) | Sub-agents, coding, Ghostwriter, cron jobs | ~$3/M in |
+| Volume | `openai/gpt-5-mini` (alias: `mini`) | Analyst, Researcher, Scout, background tasks | $0.25/M in |
+| Background | `google/gemini-2.5-flash` (alias: `flash`) | Heartbeat, compaction, Nightly Monitor | $0.15/M in |
+
+**Fallback chain:** GPT-5.2 → Opus → Gemini Flash (configured in `openclaw.json`)
+
 ### Core System
 - **Runtime**: OpenClaw gateway on Mac mini
-- **Model**: Claude Opus (main) + Sonnet (sub-agents, cron, compaction)
 - **Channel**: Discord only (Telegram disabled)
-- **Memory**: Semantic search via ollama/nomic-embed-text (18 files, 48 chunks)
+- **Memory**: Semantic search via ollama/nomic-embed-text
 - **Heartbeat**: 60 min, active hours 7 AM–11 PM ET
 - **Compaction**: Safeguard mode, 50K recent tokens preserved, 5 turns verbatim, memory flush pre-compaction
-- **Context**: 1M tokens (Opus 4.6)
+- **Context**: 1M tokens
+- **Bootstrap limits**: 32K chars/file, 200K total (raised Apr 5 to prevent AGENTS.md truncation)
 - **Subscriptions tracker**: `memory/subscriptions.md`
 - **Deadlines tracker**: `memory/deadlines.md`
 - **Setup jobs tracker**: `memory/shrike-setup-jobs.md`
@@ -177,6 +209,7 @@ flowchart TD
 | 9:00 AM Mon | LinkedIn Posts + Infographics (2/week) | #personal-branding | New: 2 posts + infographics |
 | 9:00 AM Fri | Functional Fragrance | #wellness-intel | |
 | 7:00 PM Sun | Portfolio Screenshot Reminder | Discord DM | |
+| 11:00 PM Daily | Nightly Monitor (System Watchdog) | #shrike-log + DM if errors | NEW Apr 5. Gemini Flash. Watches all crons. |
 | 11:45 PM Daily | Session Archive | Silent (memory/sessions/) | |
 
 ### Notion Databases
