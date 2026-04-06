@@ -358,3 +358,13 @@ SHRIKE Deliverables/
   - Daily System Health, Daily Sync & Cleanup, Daily Morning Briefing, Friday Beauty Brief, Friday AI Intel
 - ✅ **Nightly Monitor cron added** — 11 PM daily, Gemini Flash, watches all jobs, DMs Marina on 3+ consecutive errors
 - ✅ Multi-tier model routing: GPT-5.2 (default) → Opus (strategic depth) → Sonnet (sub-agents) → GPT-5 mini (volume) → Flash (heartbeat/monitor)
+
+### Known Issue (Apr 5, 2026)
+
+**Cron timeout enforcement appears inconsistent**: multiple `sessionTarget=isolated` cron jobs are timing out at ~60s even when the job payload sets `timeoutSeconds: 300`.
+
+**Hypothesis:** `agents.defaults.timeoutSeconds` (or another gateway-level default) is overriding per-job timeouts.
+
+**Next actions:**
+- Confirm effective timeout in gateway logs/config
+- If confirmed, bump `agents.defaults.timeoutSeconds` to match the longest scheduled job (or slim jobs to <60s)
