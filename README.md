@@ -82,16 +82,18 @@ flowchart LR
     J[Complete] --> K[Notion<br/>Archive] --> D
 ```
 
-### File Flow
+### File Flow (v8 policy)
 ```mermaid
 flowchart LR
-    A[File Created] --> B[Mac Mini<br/>Local Save]
-    B --> C[Google Drive<br/>Upload]
-    C --> D[Notion<br/>Link Added]
-    D --> E[Discord<br/>Notify]
+    A[Artifact Created] --> B[Mac Mini<br/>Local Save (creation)]
+    B --> C[Google Drive<br/>Upload (authority)]
+    C --> D[Notion<br/>Update status + link]
+    D --> E[Discord<br/>Project channel notify]
 
     style C fill:#0f9d58,color:#fff
 ```
+
+**Atomic delivery:** For project-tracked tasks, completion requires Drive + Notion + Discord.
 
 ### Architecture Flow
 ```mermaid
@@ -100,20 +102,20 @@ flowchart LR
     B --> C[Discord<br/>#shrike-log]
 ```
 
-### Failure & Retry Flow
+### Failure & Retry Flow (v8 policy)
 ```mermaid
 flowchart TD
-    A[Write Attempt] --> B{Success?}
-    B -->|Yes| C[Log Write]
+    A[Step Attempt] --> B{Success?}
+    B -->|Yes| C[Continue]
     B -->|No| D[Retry Once]
     D --> E{Success?}
     E -->|Yes| C
-    E -->|No| F[Queue for<br/>Next Sync]
-    F --> G[Log Failure]
-    G --> H{Resolved at<br/>Daily Recon?}
-    H -->|Yes| C
-    H -->|No| I[Notify Marina<br/>via Discord DM]
+    E -->|No| F[Fallback Artifact in Chat]
+    F --> G[Create Local Failure Log]
+    G --> H[Log to #shrike-log]
 ```
+
+**Rule:** Max 1 retry per failed step; then immediate fallback (no loops).
 
 ---
 
