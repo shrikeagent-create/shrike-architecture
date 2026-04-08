@@ -1,6 +1,6 @@
 # SHRIKE — System Architecture
 
-> Last updated: April 5, 2026
+> Last updated: April 7, 2026
 
 ## System Architecture
 
