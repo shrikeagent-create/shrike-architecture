@@ -1,6 +1,6 @@
 # SHRIKE — System Architecture
 
-> Last updated: April 13, 2026
+> Last updated: April 15, 2026
 
 ## System Architecture
 
@@ -183,7 +183,7 @@ flowchart TD
 | Strategic depth | `anthropic/claude-opus-4-6` (alias: `opus`) | Critical Thinker, Strategist, Negotiator, fallback | $15/M in |
 | Workers | `anthropic/claude-sonnet-4-6` (alias: `sonnet`) | Sub-agents, coding, Ghostwriter, cron jobs | ~$3/M in |
 | Volume | `openai/gpt-5-mini` (alias: `mini`) | Analyst, Researcher, Scout, background tasks | $0.25/M in |
-| Background | `google/gemini-2.5-flash` (alias: `flash`) | Heartbeat, compaction, Nightly Monitor | $0.15/M in |
+| Background | `google/gemini-2.5-flash` (alias: `flash`) | Heartbeat, compaction (when configured) | $0.15/M in |
 
 **Fallback chain:** GPT-5.2 → Opus → Gemini Flash (configured in `openclaw.json`)
 
@@ -202,7 +202,7 @@ flowchart TD
 ### Cron Schedule (staggered)
 | Time | Job | Target | Notes |
 |------|-----|--------|-------|
-| 7:00 AM Daily | System Health & Bug Fix | #shrike-log | |
+| 7:00 AM Daily | System Health & Bug Fix | #shrike-log | Temporarily on GPT-5.2 (Gemini key invalid) |
 | 7:15 AM Mon+Thu | Wellness Intel (Apollo-specific) | #wellness-intel + email to Sofya/Marina/Lyubov | Refocused: Apollo wellness only |
 | 7:30 AM Daily | Morning Briefing (11 sections) | #daily-briefing | |
 | 7:30 AM Tue+Fri | Beauty & Commerce (L'Oréal/GEO/consulting) | #beauty-commerce | Refocused: L'Oréal, GEO, consulting |
@@ -211,7 +211,7 @@ flowchart TD
 | 9:00 AM Mon | LinkedIn Posts + Infographics (2/week) | #personal-branding | New: 2 posts + infographics |
 | 9:00 AM Fri | Functional Fragrance | #wellness-intel | |
 | 7:00 PM Sun | Portfolio Screenshot Reminder | Discord DM | |
-| 11:00 PM Daily | Nightly Monitor (System Watchdog) | #shrike-log + DM if errors | NEW Apr 5. Gemini Flash. Watches all crons. |
+| 11:00 PM Daily | Nightly Monitor (System Watchdog) | #shrike-log + DM if errors | NEW Apr 5. Temporarily on GPT-5.2 (Gemini key invalid). Watches all crons. |
 | 11:45 PM Daily | Session Archive | Silent (memory/sessions/) | |
 
 ### Notion Databases
